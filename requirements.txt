@@ -1,0 +1,6 @@
+Flask
+python-dotenv
+build
+waitress
+psycopg2
+mokkari

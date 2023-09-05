@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Comic Book Lookup
+{% endblock %}
+
+{% block body %}
+
+<h1>Comic Book Lookup</h1>
+
+<form method="post">
+  <label for="isbn">
+    ISBN Lookup:
+    <input type="number" name="isbn">
+  </label>
+  <button type="submit">Look Up ISBN</button>
+</form>
+
+{% if comics %}
+<h2>Here are your results</h2>
+  {% for i in range(comics_length) %}
+    <section>
+      <h3 id="title{{ i }}">{{ comics[i]["title"] }} #{{ comics[i]["series_place"] }}</h3>
+      <img id="img{{ i }}" src="{{ comics[i]['image'] }}" alt="{{ comics[i]['title'] }} cover">
+      <p id="desc{{ i }}">{{ comics[i]["desc"] }}
+      <p>Volume {{ comics[i]['volume'] }}</p>
+      <p>Variants:</p>
+      {% for variant in comics[i]["variants"] %}
+      <div>
+        <p>{{ variant["name"] }}</p>
+        <img src="{{ variant['image'] }}" alt="{{ variant['name']}}" />
+      </div>
+      {% endfor %}
+      {% if comics[i]["owned"] %}
+      <p>You own this comics[i]!</p>
+      {% else %}
+      <button id="addButton" value="{{ i }}" onclick="addComicToLibrary(`{{comics[i]['title']}}`, `{{comics[i]['series_place']}}`, `{{comics[i]['desc']}}`, `{{comics[i]['image']}}`, `{{comics[i]['volume']}}`)">Add</button>
+      {% endif %}
+      </section>
+  {% endfor %}
+
+
+{% endif %}
+
+
+<script src="{{url_for('static', filename='js/comics/lookup.js')}}"></script>
+
+
+{% endblock %}

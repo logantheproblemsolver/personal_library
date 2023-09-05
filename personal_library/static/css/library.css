@@ -1,0 +1,34 @@
+.item_div {
+  width: 350px;
+  margin: 30px auto;
+}
+
+.item_desc {
+  text-align: left;
+}
+
+.item_cover {
+  width: 350px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 769px ) {
+  .item_div {
+    width: 500px;
+  }
+
+  .item_cover {
+    width: 500px;
+  }
+  
+}
+
+@media screen and (min-width: 1025px) {
+  .item_div {
+    width: 900px;
+  }
+
+  .item_cover {
+    width: auto;
+  }
+}

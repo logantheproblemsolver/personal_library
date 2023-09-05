@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Comic Book Library
+{% endblock %}
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/library.css')}}">
+
+{% endblock %}
+{% block body %}
+
+<h1 class="page_title">Comic Book Library</h1>
+
+{% if comics %}
+
+{% for comic in comics %}
+<div class="item_div">
+  <h2 class="item_title">{{comic[2]}} #{{comic[3]}}</h2>
+  <p class="item_desc">{{comic[4]}}</p>
+  <img class="item_cover" src="{{comic[6]}}" alt="{{comic[2]}} #{{comic[3]}} image" />
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+
+
+<script src="{{url_for('static', filename='js/comics/library.js')}}"></script>
+
+
+{% endblock %}
