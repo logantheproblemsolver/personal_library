@@ -1,0 +1,28 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "personal_library"
+version = "0.1.0"
+description = "Personal Library"
+authors = [
+    {name = "Logan Ellis", email = "mrloganellis@gmail.com"},
+]
+requires-python = ">=3.9"
+
+dependencies = [
+  "Flask",
+  "python-dotenv",
+  "build",
+  "waitress",
+  "psycopg2",
+  "mokkari"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort",
+]
