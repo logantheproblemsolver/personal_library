@@ -3,28 +3,28 @@ import mokkari
 from personal_library import db
 import os
 
-bp = Blueprint('comics', __name__, url_prefix='/comics', static_folder='static', template_folder="../templates/comics/")
+bp = Blueprint('comics', __name__, url_prefix='/library/comics', static_folder='static', template_folder="../templates/comics/")
 
-@bp.route('/')
-def index():
-  m = mokkari.api(os.environ.get('MOKKARI_USERNAME'), os.environ.get('MOKKARI_PASSWORD'))
-  comics = []
-  # Get all Marvel comics for the week of 2021-06-07
-  this_week = m.issues_list({"upc": 76194137882400111})
-  print(f"{this_week=}")
-  print(bool(this_week))
-  for i in this_week:
-      print(f"{i.id} {i.issue_name}")
-      issue = m.issue(i.id)
-      print(f"{issue.image=}")
-      comics.append({
-          "title": issue.series.name,
-          "series_place": issue.series.volume,
-          "image": issue.image,
-          "desc": issue.desc
-      })
-  print(f"{comics=}")
-  return "Comic found!"
+# @bp.route('/')
+# def index():
+#   m = mokkari.api(os.environ.get('MOKKARI_USERNAME'), os.environ.get('MOKKARI_PASSWORD'))
+#   comics = []
+#   # Get all Marvel comics for the week of 2021-06-07
+#   this_week = m.issues_list({"upc": 76194137882400111})
+#   print(f"{this_week=}")
+#   print(bool(this_week))
+#   for i in this_week:
+#       print(f"{i.id} {i.issue_name}")
+#       issue = m.issue(i.id)
+#       print(f"{issue.image=}")
+#       comics.append({
+#           "title": issue.series.name,
+#           "series_place": issue.series.volume,
+#           "image": issue.image,
+#           "desc": issue.desc
+#       })
+#   print(f"{comics=}")
+#   return "Comic found!"
 
 
 @bp.route('/lookup', methods=('GET', 'POST'))
@@ -90,7 +90,7 @@ def add():
         print("Error executing the command:", e)
     return { 'message': "that worked!" }
 
-@bp.route('/library', methods=['GET'])
+@bp.route('/', methods=['GET'])
 def view_comics():
     cursor = db.cursor()
     select_query = ''' SELECT * from comics '''

@@ -30,7 +30,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/')
+    @app.route('/library')
     def hello():
         return 'Hello, World!'
     from .views import comics, books
